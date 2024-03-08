@@ -13,10 +13,6 @@ const app = new Hono()
 
 app.use('/static/*', serveStatic({ root: './' }))
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
-
 app.get('/leases',async (c) => {
   try {
     const leases = await readFile(config.dhcpleases,'utf8')
@@ -26,7 +22,7 @@ app.get('/leases',async (c) => {
   }
 })
 
-const port = 3000
+const port = config.httpport
 
 console.log(`Server is running on port ${port}`)
 
